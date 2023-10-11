@@ -12,7 +12,7 @@ const generateToken = (id) => {
 };
 
 //Register user
-const registerUser = asyncHandler(async (res, req) => {
+const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
   //Validation
@@ -22,17 +22,18 @@ const registerUser = asyncHandler(async (res, req) => {
   }
   if (password.length < 6) {
     res.status(400);
-    throw new Error("Password must be up to 6 characters");
+    throw new Error("Password must be up to 6 characters.");
   }
 
-  const userExist = await User.findOne({ email });
+  //Check if user email already exists
+  const userExists = await User.findOne({ email });
 
-  if (userExist) {
+  if (userExists) {
     res.status(400);
     throw new Error("Email has already been used.");
   }
 
-  //Create a new user
+  //Create new user
   const user = await User.create({
     name,
     email,
@@ -42,17 +43,20 @@ const registerUser = asyncHandler(async (res, req) => {
   //Generate Token
   const token = generateToken(user._id);
 
-  res.cookies("token", token, {
+  //Send HTTP-only cookie
+  //-The first argument is the name of the cookie
+  //-The second argument is the value of your cookie
+  //-The third argument is describe how we are going to save our cookie
+  res.cookie("token", token, {
     path: "/",
     httpOnly: true,
-    expires: new Data(Data.now() + 1000 * 86400), //1 day
-    sameSite: "none",
+    expires: new Date(Date.now() + 1000 * 86400), //1 day
+    sameSite: "none", //-This means that our front end and back end can have different URLs.
     secure: true,
   });
 
   if (user) {
     const { _id, name, email, photo, phone, bio } = user;
-
     res.status(201).json({
       _id,
       name,
@@ -64,7 +68,7 @@ const registerUser = asyncHandler(async (res, req) => {
     });
   } else {
     res.status(400);
-    throw new Error("Invalid user data");
+    throw new Error("Invalid user data.");
   }
 });
 

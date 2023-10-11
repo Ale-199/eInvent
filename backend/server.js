@@ -28,6 +28,7 @@ app.use(
     extended: false,
   })
 );
+//-The body parser helps us pass that data and convert it to an object that
 app.use(bodyParser.json());
 app.use(
   cors({
@@ -41,7 +42,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 //Route Middleware
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
-// app.use("/api/contactus", contactRoute);
+app.use("/api/contactus", contactRoute);
 
 //Routes
 app.get("/", (req, res) => {

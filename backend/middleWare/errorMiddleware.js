@@ -6,7 +6,7 @@ const errorHandler = (err, req, res, next) => {
   res.json({
     message: err.message,
     //err.stack will show you where the exact location of the error in the file.
-    stack: process.env.NODE_DEV === "development" ? err.stack : null,
+    stack: process.env.NODE_ENV === "development" ? err.stack : null,
   });
 };
 
