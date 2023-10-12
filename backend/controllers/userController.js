@@ -173,7 +173,7 @@ const loginStatus = asyncHandler(async (req, res) => {
 
 //Update user
 const updateUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user_id);
+  const user = await User.findById(req.user._id);
   if (user) {
     const updatedUser = await User.findOneAndUpdate(
       { _id: user._id },
@@ -244,9 +244,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
   //save the resetToken to the database
   await new ResetToken({
     userId: user._id,
-    token: hashedResetToken,
-    createAt: Data.now(),
-    expiresAt: Data.now() + 30 * (60 * 1000), //30 minutes
+    resetToken: hashedResetToken,
+    createdAt: Date.now(),
+    expiresAt: Date.now() + 30 * (60 * 1000), //30 minutes
   }).save();
 
   //reset URL
@@ -279,15 +279,19 @@ const forgotPassword = asyncHandler(async (req, res) => {
 
 const resetPassword = asyncHandler(async (req, res) => {
   const { password } = req.body;
-  const { resetToken } = req.params;
+  const { resettoken } = req.params;
 
+  //Hash resetToken before saving to DB
   const hashedToken = crypto
+    //-algorithm we want to use. - sha256
     .createHash("sha256")
-    .update(resetToken)
+    //-specify what we wan to hash.
+    .update(resettoken)
+    //-creating the digest in hex encoding
     .digest("hex");
 
   const userToken = await ResetToken.findOne({
-    token: hashedToken,
+    resetToken: hashedToken,
     expiresAt: { $gt: Date.now() },
   });
 
