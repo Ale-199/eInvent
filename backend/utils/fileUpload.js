@@ -1,10 +1,13 @@
 const multer = require("multer");
 
+// Define file storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+    //second parameter is the folder name, where we are going to store the file
+    //-We also need to specify it in the server.js
     cb(null, "uploads");
   },
-
+  //-Define the name where we want to save the file as.
   filename: function (req, file, cb) {
     cb(
       null,
@@ -17,6 +20,7 @@ const storage = multer.diskStorage({
   },
 });
 
+//Specify file format that can be saved
 function fileFilter(req, file, cb) {
   if (
     file.mimetype === "image/png" ||

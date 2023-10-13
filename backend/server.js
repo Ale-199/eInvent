@@ -1,3 +1,6 @@
+//This has to be import firstly, because js is running from top to bottom.
+dotenv = require("dotenv").config();
+
 //
 const path = require("path");
 
@@ -8,7 +11,7 @@ const contactRoute = require("./routes/contactRoute");
 const errorHandler = require("./middleWare/errorMiddleware");
 
 //
-dotenv = require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -37,6 +40,7 @@ app.use(
   })
 );
 
+//-We link up our uploads functionality is going to point to the upload folder.
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 //Route Middleware

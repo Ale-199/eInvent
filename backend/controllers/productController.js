@@ -11,35 +11,44 @@ const createProduct = asyncHandler(async (req, res) => {
   //Validation
   if (!name || !category || !quantity || !price || !description) {
     res.status(400);
-    throw new Error("Please fill in all fields.");
+    throw new Error("Please fill in all fields");
   }
 
   //Handle Image upload
   let fileData = {};
   if (req.file) {
+    //Save image to cloudinary
     let uploadedFile;
     try {
+      //-The first argument is the location of file you want to upload.
+      //-The second argument is an object that contains some setting
+      //like where do you want to save the file.
       uploadedFile = await cloudinary.uploader.upload(req.file.path, {
-        folder: "eIvent App",
+        folder: "eInvent App",
         resource_type: "image",
       });
+
       console.log(uploadedFile);
-    } catch (err) {
-      res.status(500);
-      throw new Error("Image could not be uploaded.");
+    } catch (error) {
+      res.status(400);
+      // throw new Error("Image could not be uploaded, please try again.");
     }
 
     fileData = {
       fileName: req.file.originalname,
+      //-That was where is the file located.
       filePath: uploadedFile.secure_url,
       fileType: req.file.mimetype,
+      //-req.file.size is going to give us the size of file in bytes.
+      //-So usually we want to convert it to kilobytes
+      //-The second argument is how many decimal places do you want it to have?
       fileSize: fileSizeFormatter(req.file.size, 2),
     };
   }
 
-  //Create product
+  // Create Product
   const product = await Product.create({
-    user: req.user._id,
+    user: req.user.id,
     name,
     sku,
     category,
@@ -49,7 +58,7 @@ const createProduct = asyncHandler(async (req, res) => {
     image: fileData,
   });
 
-  res.status(200).json(product);
+  res.status(201).json(product);
 });
 
 //Get all the product
@@ -68,8 +77,9 @@ const getProduct = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Product not found.");
   }
+  console.log(req.user._id); //new ObjectId("6527f81403af2896f52147c3")
   //Match product to its user
-  if (product.user.toString() !== req.user._id) {
+  if (product.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("User not authorized.");
   }
@@ -99,7 +109,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 const updateProduct = asyncHandler(async (req, res) => {
   const { name, category, quantity, price, description } = req.body;
-  const { id } = params.id;
+  const { id } = req.params;
   const product = await Product.findById(id);
 
   //If product does not exist
@@ -120,7 +130,7 @@ const updateProduct = asyncHandler(async (req, res) => {
     let uploadedFile;
     try {
       uploadedFile = await cloudinary.uploader.upload(req.file.path, {
-        folder: "PinventApp",
+        folder: "eInvent App",
         resource_type: "image",
       });
     } catch (error) {
