@@ -1,0 +1,41 @@
+/* ============== Google Fonts ==================== */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;900&display=swap");
+
+/* ============== Variable CSS =====================*/
+:root {
+  --primary-color: #007bff;
+  --category1-color: #b624ff;
+  --category2-color: #32963d;
+  --category3-color: #c41849;
+  --category4-color: #03a5fc;
+  --layout-color: #eeeeee;
+  --formBg-color: #f4f5f9;
+  --text-color: #ffffff;
+  --text-color2: #333333;
+  --bg-color: #030b6b;
+
+  /* ======== Font ========= */
+  --body-font: "Poppins", sans-serif;
+
+  /* ======== Transition ========= */
+  --transition: all 0.3s ease-in;
+}
+
+/* ================= Base =================== */
+* {
+  padding: 0;
+  margin: 0;
+  /* If you set box-sizing: border-box; on an element, padding and border are included in the width and height: */
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}

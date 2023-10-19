@@ -87,6 +87,7 @@ const getProduct = asyncHandler(async (req, res) => {
   res.status(200).json(product);
 });
 
+//Delete product
 const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
