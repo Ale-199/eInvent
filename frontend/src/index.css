@@ -34,8 +34,19 @@ html {
   scroll-behavior: smooth;
 }
 
-button {
+.btn {
   cursor: pointer;
   border: none;
   outline: none;
+  text-decoration: none;
+  color: var(--text-color);
+  background-color: var(--primary-color);
+  border-radius: 7px;
+  padding: 0.1rem 0.5rem;
+  transition: var(--transition);
+  font-size: 1.3rem;
+}
+
+.btn:hover{
+  scale: 1.1;
 }
