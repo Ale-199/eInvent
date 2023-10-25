@@ -1,0 +1,137 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  background: url("../../assets/bg.png") no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.formBox {
+  position: relative;
+  width: 25rem;
+  height: 30rem;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register__formBox {
+  height: 35rem;
+}
+
+.auth__form > :nth-child(1) {
+  font-size: 2em;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.inputBox {
+  position: relative;
+  margin: 30px 0;
+  width: 310px;
+  border-bottom: 2px solid #fff;
+}
+
+.inputBox label {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: var(--text-color);
+  font-size: 1em;
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+  top: -5px;
+}
+
+.inputBox input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  padding: 0 35px 0 5px;
+  color: var(--text-color2);
+}
+
+.inputBox > .auth__icon {
+  position: absolute;
+  right: 8px;
+  color: var(--text-color);
+  font-size: 1.2em;
+  top: 20px;
+}
+
+.forget {
+  margin: -15px 0 15px;
+  font-size: 0.7em;
+  color: var(--text-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+.forget > .link {
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.forget > .link:hover {
+  text-decoration: underline;
+}
+
+.auth__button {
+  width: 100%;
+  height: 40px;
+  border-radius: 40px;
+  background: var(--text-color);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.auth__button:hover {
+  scale: 1.1;
+}
+
+.auth__links {
+  font-size: 0.9em;
+  color: var(--text-color);
+  text-align: center;
+  margin: 25px 0 10px;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.toLogin__container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.link:hover {
+  text-decoration: underline;
+}
