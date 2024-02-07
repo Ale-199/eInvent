@@ -5,6 +5,7 @@ import { BiLock } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  
   const login = async (e) => {
     e.preventDefault();
   };
@@ -31,10 +32,13 @@ const Login = () => {
           </div>
           <button className="auth__button">Log in</button>
           <div className="auth__links">
-              Don't have an account?
-              <Link to="/register" className="link">
-                Register
-              </Link>
+            <Link to="/" className="link">
+              Home
+            </Link>
+            Don't have an account?
+            <Link to="/register" className="link">
+              Register
+            </Link>
           </div>
         </form>
       </div>

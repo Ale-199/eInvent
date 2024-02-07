@@ -1,0 +1,16 @@
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 230px;
+  height: 100vh;
+  flex-shrink: 0;
+  background-color: var(--text-color);
+  overflow: auto;
+  color: var(--text-color2);
+  transition: all 0.5s;
+}
